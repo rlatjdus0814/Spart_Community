@@ -1,13 +1,15 @@
 import React from 'react';
+import Grid from '../elements/Grid';
 
 const Post = (props) => {
-  console.log(props)
   return (
       <React.Fragment>
-        <div>user profile / user name /insert_dt / is-me (edit_btn)</div>
-        <div>contents</div>
-        <div>image</div>
+        <Grid padding='16px'>
+          <div>user profile / user name /insert_dt</div>
+          <div>contents</div>
+          <div>image</div>
         <div>comment cnt</div>
+        </Grid>
       </React.Fragment>
   );
 }
