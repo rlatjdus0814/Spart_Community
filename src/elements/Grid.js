@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Grid = (props) => {
-  const { is_felx, width, margin, padding, bg, children } = props;
+  const { is_flex, width, margin, padding, bg, children } = props;
   const styles = {
-    is_felx: is_felx,
+    is_flex: is_flex,
     width: width,
     margin: margin,
     padding: padding,
