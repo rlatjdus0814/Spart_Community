@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Grid, Text, Button } from '../elements';
-import { getCookie, deleteCookie } from '../shared/Cookie';
+// Redux Hook
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const Header = (props) => {
-  const [ is_login, setIsLogin ] = useState(false);
-
-  useEffect(() => {
-    let cookie = getCookie('user_id');
-    console.log(cookie);
-
-    if(cookie){
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  })
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
 
   if(is_login){
     return (
@@ -22,11 +14,11 @@ const Header = (props) => {
         <Grid is_flex padding='4px 16px'>
           <Grid>
             <Text size='24px' bold margin='0px'>Hello</Text>
-          </Grid>
+          </Grid>  
           <Grid is_flex>
-            <Button text='내정보'></Button>
+          <Button text='내정보'></Button>
             <Button text='알림'></Button>
-            <Button text='로그아웃' onClick={() => deleteCookie('user_id')}></Button>
+            <Button text="로그아웃" _onClick={() => {dispatch(userActions.logOut({}));}}></Button>
           </Grid>
         </Grid>
       </React.Fragment>

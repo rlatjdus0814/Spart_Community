@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { getCookie, setCookie, deleteCookie } from '../shared/Cookie';
+import { setCookie, deleteCookie } from '../../shared/Cookie';
 
 // actions type
 const LOG_IN = 'LOG_IN';
@@ -17,6 +17,15 @@ const initialState = {
   user: null,
   is_login: false,
 };
+
+// middleware actions
+const loginAction = (user) => {
+  return function (dispatch, getState, {history}){
+     console.log(history);
+     dispatch(logIn(user));
+     history.push('/');
+  }
+}
 
 // reducer
 export default handleActions({
@@ -38,5 +47,6 @@ const actionCreators = {
   logIn,
   logOut,
   getUser,
+  loginAction,
 }
 export { actionCreators };
