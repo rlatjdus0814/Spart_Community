@@ -4,9 +4,17 @@ import { Grid, Text, Button } from '../elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
+import { history } from '../redux/configureStore';
+import { apiKey } from '../shared/Firebase';
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+
+  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_key) ? true : false;
+
+  console.log(is_session);
 
   if(is_login){
     return (
@@ -32,8 +40,12 @@ const Header = (props) => {
           <Text size='24px' bold margin='0px'>Hello</Text>
         </Grid>
         <Grid is_flex>
-          <Button text='로그인'></Button>
-          <Button text='회원가입'></Button>
+          <Button text='로그인' _onClick={() => {
+            history.push('/login');
+          }}></Button>
+          <Button text='회원가입' _onClick={() => {
+            history.push('/signup');
+          }}></Button>
         </Grid>
       </Grid>
     </React.Fragment>
