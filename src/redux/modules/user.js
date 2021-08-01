@@ -94,6 +94,15 @@ const loginCheckFB = () => {
   }
 }
 
+const logoutFB = () => {
+  return function (dispatch, getState, {history}){
+    auth.signOut().then(() => {
+      dispatch(logOut());
+      history.replace('/');
+    })
+  }
+}
+
 // reducer
 export default handleActions({
   [SET_USER]: (state, action) => produce(state, (draft) => {
@@ -115,6 +124,7 @@ const actionCreators = {
   getUser,
   signupFB,
   loginFB,
-  loginCheckFB
+  loginCheckFB,
+  logoutFB,
 }
 export { actionCreators };
