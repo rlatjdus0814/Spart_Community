@@ -6,14 +6,23 @@ import { actionCreators as userActions } from '../redux/modules/user';
 
 import { history } from '../redux/configureStore';
 import { apiKey } from '../shared/Firebase';
-import Permit from '../shared/Permit';
+import Permit from '../shared/Permit.js';
 
 const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_key) ? true : false;
+  console.log(is_session);
+  
+  // if(is_login && is_session){
+  //   return(
+    
+  //     )
+  // }
 
-  <Permit>
-    <React.Fragment>
+    <Permit>
+      <React.Fragment>
         <Grid is_flex padding='4px 16px'>
           <Grid>
             <Text size='24px' bold margin='0px'>Hello</Text>
@@ -25,7 +34,8 @@ const Header = (props) => {
           </Grid>
         </Grid>
       </React.Fragment>
-  </Permit>
+    </Permit>
+  
   
   return (
     <React.Fragment>
