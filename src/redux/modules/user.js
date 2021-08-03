@@ -22,10 +22,6 @@ const initialState = {
   is_login: false,
 }
 
-const user_initial = {
-  user_name: 'sy',
-}
-
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}){
     auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
