@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Post from '../components/Post';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import InfinityScroll from '../shared/InfinityScroll';
 
 const PostList = (props) => {
   const dispatch = useDispatch();
@@ -18,15 +19,15 @@ const PostList = (props) => {
 
   return (
     <React.Fragment>
-      {post_list.map((props, idx) => {
-        console.log(props)
-        console.log(user_info?.uid)
-        if(user_info && props.user_id === user_info?.uid){
-          return <Post key={props.id} {...props} is_me />
-        } else {
-          return <Post key={props.id} {...props} />
-        }
-      })}
+      <InfinityScroll>
+        {post_list.map((props, idx) => {
+          if(user_info && props.user_id === user_info?.uid){
+            return <Post key={props.id} {...props} is_me />
+          } else {
+            return <Post key={props.id} {...props} />
+          }
+        })}
+      </InfinityScroll>
       <button onClick={() => {dispatch(postActions.getPostFB(paging.next));}}>
           추가 로드
         </button>
