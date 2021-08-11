@@ -7,7 +7,8 @@ const PostList = (props) => {
   const dispatch = useDispatch();
   const post_list = useSelector((state) => state.post.list);
   const user_info = useSelector((state) => state.user.user);
-  console.log(post_list)
+  const is_loading = useSelector((state) => state.post.loading);
+  const paging = useSelector((state) => state.post.paging);
 
   useEffect(() => {
     if(post_list.length === 0){
@@ -26,6 +27,9 @@ const PostList = (props) => {
           return <Post key={props.id} {...props} />
         }
       })}
+      <button onClick={() => {dispatch(postActions.getPostFB(paging.next));}}>
+          추가 로드
+        </button>
     </React.Fragment>
   );
 }
