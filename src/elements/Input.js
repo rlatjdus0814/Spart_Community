@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Text, Grid } from './index';
 
 const Input = (props) => {
-  const { label, placeholder, _onChange, type, multiLine } = props;
+  const { label, placeholder, _onChange, type, multiLine, value } = props;
 
   if(multiLine){
     return(
       <Grid>
         {label && <Text margin='0px'>{label}</Text>}
-        <ElTextarea rows={5} placeholder={placeholder} onChange={_onChange}></ElTextarea>
+        <ElTextarea rows={5} value={value} placeholder={placeholder} onChange={_onChange}></ElTextarea>
       </Grid>
     )
   }
@@ -21,7 +21,7 @@ const Input = (props) => {
       </Grid>
     </React.Fragment>
   );
-}
+} 
 
 Input.defalutProps = {
   label: false,
@@ -29,6 +29,7 @@ Input.defalutProps = {
   type: 'text',
   _onChange: () => {},
   multiLine: false,
+  value: '',
 }
 
 const ElTextarea = styled.textarea`
