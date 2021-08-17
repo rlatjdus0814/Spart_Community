@@ -8,7 +8,7 @@ const Upload = (props) => {
   const dispatch = useDispatch();
   const fileInput = useRef();
   const is_uploading = useSelector(state => state.image.uploading);
-  
+
   const selectFile = (e) => {
     console.log(e);
     console.log(e.target)
@@ -37,7 +37,7 @@ const Upload = (props) => {
     })
   }
 
-  return(
+  return (
     <React.Fragment>
       <input type='file' onChange={selectFile} ref={fileInput} disabled={is_uploading} />
       <Button _onClick={uploadFB} height={30}>업로드하기</Button>

@@ -12,27 +12,37 @@ const PostList = (props) => {
   const paging = useSelector((state) => state.post.paging);
 
   useEffect(() => {
-    if(post_list.length === 0){
+    if (post_list.length === 0) {
       dispatch(postActions.getPostFB());
     }
   }, []);
 
   return (
     <React.Fragment>
-      <InfinityScroll>
+      <InfinityScroll
+        callNext={() => {
+          console.log('next!');
+          dispatch(postActions.getPostFB(paging.next));
+        }}
+        is_next={paging.next ? true : false}
+        loading={is_loading}>
         {post_list.map((props, idx) => {
-          if(user_info && props.user_id === user_info?.uid){
-            return <Post key={props.id} {...props} is_me />
+          if (props.user_id === user_info?.uid) {
+            console.log(props.id);
+            return <Post key={props.id} {...props} is_me />;
           } else {
-            return <Post key={props.id} {...props} />
+            return <Post key={props.id} {...props} />;
           }
         })}
       </InfinityScroll>
-      <button onClick={() => {dispatch(postActions.getPostFB(paging.next));}}>
-          추가 로드
-        </button>
+      {/* <button
+        onClick={() => {
+          dispatch(postActions.getPostFB(paging.next));
+        }}>
+        추가 로드
+      </button> */}
     </React.Fragment>
   );
-}
+};
 
 export default PostList;
